@@ -7,6 +7,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+langchain = "^0.2.5"
+qdrant-client = "^1.9.2"
+python-decouple = "^3.8"
 
 
 [build-system]
