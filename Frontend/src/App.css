@@ -4,3 +4,105 @@
   padding: 1rem;
   text-align: center;
 }
+
+
+.main-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  gap: 10px
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+.form-button {
+  padding: 10px 20px;
+  margin: 15px 0 0 0;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.loader-container {
+  margin-top: 10px;
+}
+
+.expander {
+  border: 2px solid #3498db;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  border-radius: 5px
+}
+
+.expander-title {
+  cursor: pointer;
+  ;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 5px;
+  color: blue;
+  font-size: 25px;
+}
+
+.expander-content {
+  padding: 10px 10px 10px 10px;
+  text-align: left;
+}
+
+.results-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
+  gap: 20px;
+  min-width: 100%
+}
+
+.results-documents {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  width: 50%;
+}
+
+.results-answer {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  text-align: left;
+  width: 50%;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
