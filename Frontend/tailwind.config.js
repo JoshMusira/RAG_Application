@@ -1,12 +1,3 @@
-python-decouple
-qdrant-client
-langchain
-openai
-langchain_community
-langchain_qdrant
-langchain_openai
-beautifulsoup4
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
