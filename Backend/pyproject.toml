@@ -10,6 +10,13 @@ python = "^3.12"
 langchain = "^0.2.5"
 qdrant-client = "^1.9.2"
 python-decouple = "^3.8"
+openai = "^1.35.3"
+langchain-community = "^0.2.5"
+langchain-openai = "^0.1.8"
+langchain-qdrant = "^0.1.1"
+beautifulsoup4 = "^4.12.3"
+sentence-transformers = "^3.0.1"
+decouple = "^0.0.7"
 
 
 [build-system]
