@@ -10,8 +10,8 @@ const LandingPageLayout = () => {
                 <div className="flex items-center justify-center shadow-sm shadow-white rounded-md animated-shadow">
                     <p className="text-6xl font-bold text-blue-700 p-2">Welcome To Retrieval Augmented Generation</p>
                 </div>
-                <div className="  font-sans text-xl text-[#285093] font-bold flex justify-end">
-                    <NavLink to="/" className="mx-2 text-3xl hover:text-[#3a5da2] border-b-2 transition-all duration-300 ease-in-out hover:border-[#285093] " >Home</NavLink>
+                <div className="  font-sans text-xl text-[#285093] font-bold flex gap-10 justify-end">
+                    <NavLink to="/" className="mx-2 text-3xl hover:text-[#3a5da2]  transition-all duration-300 ease-in-out hover:border-[#285093] " >Home</NavLink>
                     <NavLink to="conversation" className="mx-2 text-3xl hover:text-[#3a5da2] transition-all duration-300 ease-in-out hover:border-[#285093] " >Conversation</NavLink>
                 </div>
                 <Outlet />

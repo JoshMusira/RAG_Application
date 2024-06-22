@@ -6,15 +6,6 @@ langchain_community
 langchain_qdrant
 langchain_openai
 beautifulsoup4
-
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
+WordCloud
+nltk
+matplotlib

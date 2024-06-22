@@ -20,6 +20,16 @@
   gap: 10px
 }
 
+.form-input-home {
+  width: 80%;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
 .form-input {
   width: 100%;
   padding: 10px;
@@ -64,8 +74,8 @@
   ;
   padding: 10px 10px 10px 10px;
   margin-bottom: 5px;
-  color: blue;
-  font-size: 25px;
+  color: white;
+  font-size: 20px;
 }
 
 .expander-content {
