@@ -9,6 +9,7 @@ beautifulsoup4
 WordCloud
 nltk
 matplotlib
+newsapi
 
 On June 23, 2024, President Joe Biden delivered a series of stark warnings about what a second Donald Trump term could hold during a star-studded Los Angeles fundraiser.
 He emphasized the importance of institutions and criticized Trump's actions, particularly referencing the events of January 6.

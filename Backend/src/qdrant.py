@@ -6,11 +6,14 @@ from qdrant_client import QdrantClient, models
 from decouple import config
 # from qdrant_client import QdrantClient, models
 from qdrant_client.http.models import Filter
-import string
+import newsapi
+import requests
+import openai
 
 qdrant_api_key = config("QDRANT_API_KEY")
 qdrant_url = config("QDRANT_URL")
 collection_name = "Joe Bidens News"
+openai_api_key = config("OPENAI_API_KEY")
 
 client = QdrantClient(
     url=qdrant_url,
@@ -21,7 +24,7 @@ vector_store = Qdrant(
     client=client,
     collection_name=collection_name,
     embeddings=OpenAIEmbeddings(
-        api_key=config("OPENAI_API_KEY")
+        api_key=openai_api_key
     )
 )
 
@@ -30,13 +33,6 @@ text_splitter = RecursiveCharacterTextSplitter(
     chunk_overlap=20,
     length_function=len
 )
-
-# def preprocess_text(text):
-#     text = text.translate(str.maketrans('', '', string.punctuation)).lower()
-#     words = text.split()
-#     words = [word for word in words if word not in stop_words]
-#     return ' '.join(words)
-
 
 
 def create_collection(collection_name):
@@ -59,6 +55,7 @@ def upload_website_to_collection(url: str):
 
         # Log the number of documents loaded
         print(f"Loaded {len(docs)} documents from {url}.")
+        
 
         for doc in docs:
             doc.metadata = {"source_url": url}
@@ -103,6 +100,39 @@ def delete_collection_content(collection_name):
         raise e
 
 
-    
+def search_news(query, start_date, end_date):
+    api_key = config("NEWS_API_KEY")
+    url = f"https://newsapi.org/v2/everything?q={query}&from={start_date}&to={end_date}&apiKey={api_key}"
+    response = requests.get(url)
+    data = response.json()
+    print(data)
+
+    try:
+        urls = [article['url'] for article in data['articles']]
+        return urls
+    except KeyError as e:
+        print(f"Error: {e}")
+        return []
+
+start_date = "2024-01-01"
+end_date = "2024-06-30"
+
+def upload_news_to_collection(url, start_date, end_date):
+    print(url)
+    # Search for news articles using OpenAI's API
+    urls = search_news(url, start_date, end_date)
+    print(len(urls))
+
+    # Upload each news article to the collection
+    for url in urls:
+        upload_website_to_collection(url)
+
+
+# Example usage:
+# query = "Joe Biden OR Donald Trump"
+
+
+# create_collection(collection_name)
+# upload_news_to_collection(query, start_date, end_date)
 # create_collection(collection_name)
 # upload_website_to_collection("https://edition.cnn.com/2024/06/21/politics/biden-trump-character-attacks/index.html")

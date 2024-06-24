@@ -1926,6 +1926,20 @@ extra = ["lxml (>=4.6)", "pydot (>=2.0)", "pygraphviz (>=1.12)", "sympy (>=1.10)
 test = ["pytest (>=7.2)", "pytest-cov (>=4.0)"]
 
 [[package]]
+name = "newsapi"
+version = "0.1.1"
+description = "A python wrapper for News API (newsapi.org)"
+optional = false
+python-versions = "*"
+files = [
+    {file = "newsapi-0.1.1-py2.py3-none-any.whl", hash = "sha256:baef702f6e29fc2736932858528d94f18b2baaef9d330018ba78369e005e1df4"},
+    {file = "newsapi-0.1.1.tar.gz", hash = "sha256:ba6eae31d66f8a804134779c4f4a984fea90ef77be20dba40c2808c75042a69a"},
+]
+
+[package.dependencies]
+requests = "*"
+
+[[package]]
 name = "nltk"
 version = "3.8.1"
 description = "Natural Language Toolkit"
@@ -4158,4 +4172,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "32d3c9a65f19a778476b1e1b42286793f2d0c4ab68aee2896a37cfc6e89a6573"
+content-hash = "dc042ea664320d724dc5735c84410477b6cb2043339a02e6db6be09b53cef92c"
