@@ -53,6 +53,16 @@ const QuestionForm = () => {
                                 <img src={`data:image/png;base64,${wordCloudImage}`} alt="Word Cloud" />
                             </div>
                         )}
+                        {keywords.length > 0 && (
+                            <div className="results-keywords">
+                                <h2 className='font-bold text-2xl text-red-500 mt-2'>Keywords:</h2>
+                                <ul>
+                                    {keywords.map((keyword, index) => (
+                                        <li key={index}>{keyword}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
                     </div>
                     <div className="results-documents">
                         <h2 className='font-bold text-2xl text-red-500'>Documents:</h2>

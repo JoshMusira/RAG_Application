@@ -21,6 +21,8 @@ wordcloud = "^1.9.3"
 matplotlib = "^3.9.0"
 nltk = "^3.8.1"
 spacy = "^3.7.5"
+scikit-learn = "^1.5.0"
+tfidfinheritvectorizer = "^0.1"
 
 
 [build-system]

@@ -10,7 +10,8 @@ async def Chat(message: models.Message):
     "question": message.message,
     "answer": response["answer"],
     "documents": [doc.dict() for doc in response["context"]],
-    "word_cloud_image": response["word_cloud_image"]
+    "word_cloud_image": response["word_cloud_image"],
+    "keywords": response["keywords"]
 
   }
   return JSONResponse(content=response_content, status_code=200)
