@@ -25,7 +25,7 @@ model = ChatOpenAI(
 )
 
 prompt_template = """
-Answer the question based on the context and timestamps (day, week, month, quarter, year, etc.) provided by the user. Keep in mind the year or entire date provided in the user's documents. Only answer the question as asked, without giving wrong answers or incorrect timestamp references. If only a year is provided, interpret it accordingly. Summarize the information in a detailed manner, in markdown format, and use bullet points where applicable.
+Answer the question based on the context and timestamps (day, week, month, quarter, year, etc.) provided by the user. Keep in mind the year or entire date provided in the user's documents. Only answer the question as asked, without giving wrong answers or incorrect timestamp references. If only a year is provided, interpret it accordingly. Summarize the information in a detailed manner, in markdown format and give good formats depending on the question asked, and use bullet points where applicable.
 
 Context: {context}
 Question: {question}
@@ -34,12 +34,12 @@ Answer:
 
 prompt = ChatPromptTemplate.from_template(prompt_template)
 
-retriever = vector_store.as_retriever()
+retriever = vector_store.as_retriever(search_kwargs={'k': 10})
 
 def create_chain():
     chain = (
         {
-            "context": retriever.with_config(top_k=4),
+            "context": retriever.with_config(),
             "question": RunnablePassthrough(),
         }
         | RunnableParallel({

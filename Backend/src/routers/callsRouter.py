@@ -4,7 +4,9 @@ from fastapi.responses import JSONResponse
 from ..repository import calls
 from .. import models
 from .. import qdrant
+from .. import newsapi
 from pydantic import BaseModel
+from datetime import datetime
 
 router = APIRouter(
     prefix="/api",
@@ -13,6 +15,11 @@ router = APIRouter(
 
 class CollectionRequest(BaseModel):
     collectionName: str
+
+class NewsRequest(BaseModel):
+    url: str
+    start_date: str
+    end_date: str
 
 # @router.websocket("/async_chat")
 # async def async_chat(websocket: WebSocket):
@@ -39,4 +46,19 @@ async def delete_collection_content_route(request_body: CollectionRequest):
         return JSONResponse(content={"message": result}, status_code=status.HTTP_200_OK)
     except Exception as e:
         print(f"Error in delete_collection_content_route: {e}")
+        return JSONResponse(content={"message": str(e)}, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@router.post("/upload_news", description="Upload news articles to a collection")
+async def upload_news(request_body: NewsRequest):
+    try:
+        url = request_body.url
+        start_date = datetime.strptime(request_body.start_date, '%Y-%m-%d')
+        end_date = datetime.strptime(request_body.end_date, '%Y-%m-%d')
+        newsapi.upload_news_to_collection(url, start_date, end_date)
+        return JSONResponse(content={"message": "News articles uploaded successfully"}, status_code=status.HTTP_201_CREATED)
+    except ValueError:
+        return JSONResponse(content={"message": "Invalid date format. Use YYYY-MM-DD"}, status_code=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        print(f"Error in upload_news: {e}")
         return JSONResponse(content={"message": str(e)}, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
