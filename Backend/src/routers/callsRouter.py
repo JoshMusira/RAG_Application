@@ -62,3 +62,12 @@ async def upload_news(request_body: NewsRequest):
     except Exception as e:
         print(f"Error in upload_news: {e}")
         return JSONResponse(content={"message": str(e)}, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@router.get("/count-unique-urls", description="Count the number of unique URLs in the collection")
+async def count_unique_urls_route():
+    try:
+        result = qdrant.count_unique_urls()
+        return JSONResponse(content={"message": result}, status_code=status.HTTP_200_OK)
+    except Exception as e:
+        print(f"Error in count_unique_urls_route: {e}")
+        return JSONResponse(content={"message": str(e)}, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)

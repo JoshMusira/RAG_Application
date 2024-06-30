@@ -13,6 +13,7 @@ from io import BytesIO
 from wordcloud import WordCloud, STOPWORDS
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+nltk.download('punkt')
 # Load stop words
 nltk.download('stopwords')
 stop_words = set(stopwords.words('english')).union(set(STOPWORDS))
@@ -34,7 +35,7 @@ Answer:
 
 prompt = ChatPromptTemplate.from_template(prompt_template)
 
-retriever = vector_store.as_retriever(search_kwargs={'k': 10})
+retriever = vector_store.as_retriever( search_kwargs={'k': 30})
 
 def create_chain():
     chain = (

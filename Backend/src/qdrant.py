@@ -97,10 +97,45 @@ def delete_collection_content(collection_name):
         raise e
 
 
+def count_unique_urls():
+    try:
+        # Initialize variables for pagination
+        unique_urls = set()
+        next_page_token = None
+
+        while True:
+            # Retrieve a batch of documents from the collection
+            response = client.scroll(
+                collection_name=collection_name,
+                limit=100,  # Adjust limit as needed
+                offset=next_page_token,
+                with_payload=True,
+                with_vectors=False
+            )
+            documents, next_page_token = response
+
+            # Extract URLs from metadata and add to the set of unique URLs
+            for doc in documents:
+                if 'metadata' in doc.payload and 'source_url' in doc.payload['metadata']:
+                    unique_urls.add(doc.payload['metadata']['source_url'])
+
+            # If next_page_token is None, we have reached the end of the collection
+            if next_page_token is None:
+                break
+
+        return f" {len(unique_urls)}"
+    except Exception as e:
+        print(f"Error counting unique URLs: {e}")
+        return str(e)
+
+
+
+    
+
 # Example usage:
 # query = "Joe Biden OR Donald Trump"
-start_date = "2024-06-01"
-end_date = "2024-06-22"
+# start_date = "2024-06-01"
+# end_date = "2024-06-22"
 
 # create_collection(collection_name)
 # upload_news_to_collection(query, start_date, end_date)
