@@ -49,6 +49,19 @@ const LandingPageLayout = () => {
             setIsLoadingTotalUrls(false); // Reset loading state
         }
     };
+    const handleTotalCombinedUrlsClick = async () => {
+        setIsLoadingTotalUrls(true); // Set loading state
+        try {
+            const response = await api.get('/count-unique-urls-combined');
+            setTotalUrls(response.data.message);
+            setIsTotalUrlsModalOpen(true);
+        } catch (error) {
+            console.log(error);
+            alert("There was an error fetching the total URLs!", error);
+        } finally {
+            setIsLoadingTotalUrls(false); // Reset loading state
+        }
+    };
 
     const handleCloseTotalUrlsModal = () => {
         setIsTotalUrlsModalOpen(false);
@@ -60,13 +73,19 @@ const LandingPageLayout = () => {
                 <div className="flex items-center justify-center shadow-sm shadow-white rounded-md animated-shadow">
                     <p className="text-6xl font-bold text-blue-700 p-2">Welcome To Retrieval Augmented Generation</p>
                 </div>
-                <div className="font-sans text-xl text-[#285093] font-bold flex gap-10 justify-end">
-                    <NavLink to="/" className="mx-2 text-2xl hover:text-[#3a5da2] transition-all duration-300 ease-in-out hover:border-[#285093] p-2">Home</NavLink>
-                    <NavLink to="conversation" className="mx-2 text-2xl hover:text-[#3a5da2] transition-all duration-300 ease-in-out hover:border-[#285093] p-2">Conversation</NavLink>
-                    <h1 className="mx-2 text-2xl bg-blue-600 rounded-md p-1 cursor-pointer transition-all duration-300 ease-in-out text-white px-2" onClick={handleTotalUrlsClick}>
+                <div className="font-sans text-xl text-white font-bold flex gap-10 justify-end">
+                    <NavLink to="/" className="mx-2 text-xl hover:text-[#3a5da2] transition-all duration-300 ease-in-out hover:border-[#285093] p-2">Home</NavLink>
+                    <NavLink to="conversation" className="mx-2 text-xl hover:text-[#3a5da2] transition-all duration-300 ease-in-out hover:border-[#285093] p-2">Conversation</NavLink>
+                    <NavLink to="Sources" className="mx-2 text-xl hover:text-[#3a5da2] transition-all duration-300 ease-in-out hover:border-[#285093] p-2">News Sources</NavLink>
+                    {/* <h1 className="mx-2 text-xl bg-blue-600 rounded-md p-1 cursor-pointer transition-all duration-300 ease-in-out text-white px-2" onClick={handleTotalUrlsClick}>
+                        {isLoadingTotalUrls ? "Loading..." : "Total URLs"}
+                    </h1> */}
+                    <NavLink to="combined-conversation" className="mx-2 text-xl hover:text-[#3a5da2] transition-all duration-300 ease-in-out hover:border-[#285093] p-2">Combined Conversation</NavLink>
+
+                    <h1 className="mx-2 text-xl bg-blue-600 rounded-md p-1 cursor-pointer transition-all duration-300 ease-in-out text-white px-2" onClick={handleTotalCombinedUrlsClick}>
                         {isLoadingTotalUrls ? "Loading..." : "Total URLs"}
                     </h1>
-                    <h1 className="mx-2 text-2xl bg-red-600 rounded-md p-1 cursor-pointer transition-all duration-300 ease-in-out text-black" onClick={handleDeleteClick}>Delete DB Content</h1>
+                    <h1 className="mx-2 text-xl bg-red-600 rounded-md p-1 cursor-pointer transition-all duration-300 ease-in-out text-black" onClick={handleDeleteClick}>Delete DB Content</h1>
                 </div>
                 <Outlet />
                 <ConfirmModal

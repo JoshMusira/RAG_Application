@@ -4,7 +4,7 @@ from langchain_core.runnables import RunnablePassthrough, RunnableParallel
 from langchain_openai import ChatOpenAI
 from operator import itemgetter
 from decouple import config
-from src.qdrant import vector_store
+from src.qdrant import vector_store, combined_vector_store
 import nltk
 from nltk.corpus import stopwords
 import string
@@ -36,6 +36,7 @@ Answer:
 prompt = ChatPromptTemplate.from_template(prompt_template)
 
 retriever = vector_store.as_retriever( search_kwargs={'k': 30})
+retrieverCombined = combined_vector_store.as_retriever( search_kwargs={'k': 30})
 
 def create_chain():
     chain = (
@@ -61,6 +62,36 @@ def extract_keywords(text, n_keywords=5):
 
 
 def get_answer_and_docs(question: str):
+    chain = create_chain()
+    response = chain.invoke(question)
+    answer = response["response"].content
+    context = response["context"]
+
+    # Tokenize the answer text using nltk
+    tokens = nltk.word_tokenize(answer)
+    # Extract keywords
+    keywords = extract_keywords(answer)
+
+    # Remove stop words manually
+    tokens = [word for word in tokens if word.lower() not in stop_words and word.isalnum()]
+
+    # Generate the word cloud
+    wordcloud = WordCloud(width=800, height=400, max_words=200, font_step=1, min_font_size=20, max_font_size=100, random_state=42).generate(' '.join(tokens))
+
+    # Convert the word cloud to a base64-encoded string
+    buffer = BytesIO()
+    wordcloud.to_image().save(buffer, format="PNG")
+    word_cloud_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
+
+    return {
+        "answer": answer,
+        "context": response["context"],
+        "word_cloud_image": word_cloud_image,
+        "keywords": keywords
+    }
+
+
+def get_answer_and_docs_combined(question: str):
     chain = create_chain()
     response = chain.invoke(question)
     answer = response["response"].content
