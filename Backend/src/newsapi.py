@@ -46,7 +46,7 @@ def upload_news_to_collection(query, start_date, end_date):
 
 def total_search_news(query, start_date, end_date, source):
     api_key = config("NEWS_API_KEY")
-    url = f"https://newsapi.org/v2/everything?q={query}&from={start_date}&to={end_date}&sources={source}&pageSize=2&sortBy=publishedAt&apiKey={api_key}"
+    url = f"https://newsapi.org/v2/everything?q={query}&from={start_date}&to={end_date}&sources={source}&pageSize=99&sortBy=publishedAt&apiKey={api_key}"
     response = requests.get(url)
     
     if response.status_code != 200:
@@ -59,12 +59,13 @@ def total_search_news(query, start_date, end_date, source):
         return []
 
     urls = [article['url'] for article in data['articles']]
-    print(f"URLs from {source}: {urls}")
+    # print(f"URLs from {source} {len(urls)},len{urls}: {urls}")
+    print(f"URLs from {source}: {len(urls)}")
     return urls
 
 
 def upload_news_to_collection_new(query, start_date, end_date):
-    sources = ["cnn", "bbc-news", "espn", "al-jazeera-english", "ansa"]
+    sources = ["cnn", "bbc-news", "cbc-news", "al-jazeera-english", "cbs-news", "fox-news","time","usa-today","the-wall-street-journal","reuters"]
     all_urls = []
 
     for source in sources:
