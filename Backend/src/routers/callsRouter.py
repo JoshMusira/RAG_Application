@@ -2,6 +2,7 @@
 from fastapi import APIRouter, Response, Request, status
 from fastapi.responses import JSONResponse
 
+from src.visuals import plot_source_urls, detailed_joe_biden_articles_sentiment, plot_sentiment_polarity_distribution
 from src.totalsources import get_newsapi_sources
 from ..repository import calls
 from .. import models
@@ -9,6 +10,7 @@ from .. import qdrant
 from .. import newsapi
 from pydantic import BaseModel
 from datetime import datetime
+from typing import Dict
 
 router = APIRouter(
     prefix="/api",
@@ -108,3 +110,10 @@ async def count_combined_unique_urls_route():
 def news_sources():
     sources = get_newsapi_sources()
     return {"sources": sources}
+
+@router.get("/plots", response_model=Dict[str, str])
+async def get_plots():
+    source_url_img = plot_source_urls(detailed_joe_biden_articles_sentiment)
+    sentiment_polarity_img = plot_sentiment_polarity_distribution(detailed_joe_biden_articles_sentiment)
+    return {"source_url_image": source_url_img, "sentiment_polarity_image": sentiment_polarity_img}
+
