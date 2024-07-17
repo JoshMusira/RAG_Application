@@ -36,7 +36,7 @@ Answer:
 prompt = ChatPromptTemplate.from_template(prompt_template)
 
 retriever = vector_store.as_retriever( search_kwargs={'k': 30})
-retrieverCombined = combined_vector_store.as_retriever( search_kwargs={'k': 30})
+retrieverCombined = combined_vector_store.as_retriever( search_kwargs={'k': 50})
 
 def create_chain():
     chain = (

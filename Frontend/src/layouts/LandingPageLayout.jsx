@@ -73,7 +73,7 @@ const LandingPageLayout = () => {
                 <div className="flex items-center justify-center shadow-sm shadow-white rounded-md animated-shadow">
                     <p className="text-6xl font-bold text-blue-700 p-2">Welcome To Retrieval Augmented Generation</p>
                 </div>
-                <div className="font-sans text-xl text-white font-bold flex gap-10 justify-end">
+                <div className="font-sans text-xl text-white font-bold flex gap-4 justify-end">
                     <NavLink to="/" className="mx-2 text-xl hover:text-[#3a5da2] transition-all duration-300 ease-in-out hover:border-[#285093] p-2">Home</NavLink>
                     <NavLink to="conversation" className="mx-2 text-xl hover:text-[#3a5da2] transition-all duration-300 ease-in-out hover:border-[#285093] p-2">Conversation</NavLink>
                     <NavLink to="Sources" className="mx-2 text-xl hover:text-[#3a5da2] transition-all duration-300 ease-in-out hover:border-[#285093] p-2">News Sources</NavLink>
@@ -81,6 +81,7 @@ const LandingPageLayout = () => {
                         {isLoadingTotalUrls ? "Loading..." : "Total URLs"}
                     </h1> */}
                     <NavLink to="combined-conversation" className="mx-2 text-xl hover:text-[#3a5da2] transition-all duration-300 ease-in-out hover:border-[#285093] p-2">Combined Conversation</NavLink>
+                    <NavLink to="visuals" className="mx-2 text-xl hover:text-[#3a5da2] transition-all duration-300 ease-in-out hover:border-[#285093] p-2">Visuals</NavLink>
 
                     <h1 className="mx-2 text-xl bg-blue-600 rounded-md p-1 cursor-pointer transition-all duration-300 ease-in-out text-white px-2" onClick={handleTotalCombinedUrlsClick}>
                         {isLoadingTotalUrls ? "Loading..." : "Total URLs"}

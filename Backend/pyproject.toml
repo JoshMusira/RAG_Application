@@ -27,6 +27,8 @@ newsapi = "^0.1.1"
 fastapi = "^0.111.0"
 uvicorn = "^0.30.1"
 textblob = "^0.18.0.post0"
+plotly = "^5.22.0"
+pandas = "^2.2.2"
 
 
 [build-system]

@@ -4,6 +4,7 @@ import Conversation from "../pages/Conversation";
 import LandingPageLayout from "../layouts/LandingPageLayout";
 import CombinedConversationPage from "../pages/CombinedConversationPage";
 import NewsSourcesPage from "../pages/NewsSourcesPage";
+import ImageDisplay from "../components/ImageDisplay";
 
 export const routes = createBrowserRouter(
     createRoutesFromElements(
@@ -13,6 +14,7 @@ export const routes = createBrowserRouter(
                 <Route path='conversation' element={<Conversation />} />
                 <Route path='combined-conversation' element={<CombinedConversationPage />} />
                 <Route path='Sources' element={<NewsSourcesPage />} />
+                <Route path='visuals' element={<ImageDisplay />} />
             </Route>
 
         </Route >
