@@ -1,4 +1,4 @@
-# import pandas as pd
+import pandas as pd
 from urllib.parse import urlparse
 import plotly.express as px
 import pickle
@@ -70,6 +70,31 @@ def plot_sentiment_polarity_distribution(df):
 # Perform sentiment analysis
 detailed_joe_biden_articles_sentiment = perform_sentiment_analysis(detailed_joe_biden_articles)
 
+
+def plot_topic_frequencies():
+    topics = [
+        "Biden's Press Conferences and Public Appearances",
+        "Election and Political Campaigns",
+        "Health and Fitness Concerns",
+        "Media and Public Opinion",
+        "NATO and Foreign Policy",
+        "Support and Endorsements",
+        "Fundraising and Campaign Finance",
+        "Debate Performances",
+        "Legislation and Policy Initiatives",
+        "Public Appearances and Statements"
+    ]
+
+    frequencies = [12, 10, 8, 7, 5, 4, 3, 3, 2, 2]
+
+    df = pd.DataFrame({'Topic': topics, 'Frequency': frequencies})
+
+    fig = px.bar(df, x='Topic', y='Frequency', title='Topic  10 Topics and Frequencies')
+    buf = BytesIO()
+    fig.write_image(buf, format="png")
+    buf.seek(0)
+    img_base64 = base64.b64encode(buf.read()).decode('utf-8')
+    return img_base64
 
 
 # import pandas as pd
