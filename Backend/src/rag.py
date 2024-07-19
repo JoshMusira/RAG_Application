@@ -21,7 +21,7 @@ stop_words = set(stopwords.words('english')).union(set(STOPWORDS))
 model = ChatOpenAI(
     model_name="gpt-4-turbo-preview",
     openai_api_key=config("OPENAI_API_KEY"),
-    temperature=0,
+    temperature=1,
     streaming=True
 )
 
